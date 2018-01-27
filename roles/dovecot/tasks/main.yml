@@ -1,3 +1,8 @@
+- name: be sure install requirement packages
+  yum: name={{ item }} state=installed
+  with_items:
+    - dovecot
+
 - name: be sure vmail user exist
   user: name=vmail state=present shell=/sbin/nologin createhome=no uid=5000
 

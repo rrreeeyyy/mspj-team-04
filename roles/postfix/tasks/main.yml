@@ -1,5 +1,4 @@
 - name: be sure install requirement packages
   yum: name={{ item }} state=installed
   with_items:
-    - httpd
-    - httpd-tools
+    - postfix

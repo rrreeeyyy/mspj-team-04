@@ -3,5 +3,8 @@
   become_user: root
   roles:
     - common
+    - apache
+    - php
     - dovecot
+    - postfix
     - samba
