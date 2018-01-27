@@ -13,3 +13,6 @@
 - name: be sure sudoers.d is deployed
   copy: src="sudoers.d/{{ item.name }}" dest="/etc/sudoers.d/{{ item.name }}" owner="root" group="root" mode=0600
   with_items: "{{ users }}"
+
+- name: be sure selinux disabled
+  selinux: state=disabled

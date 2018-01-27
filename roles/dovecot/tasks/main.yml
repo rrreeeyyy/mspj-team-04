@@ -1,0 +1,5 @@
+- name: be sure vmail user exist
+  user: name=vmail state=present shell=/sbin/nologin createhome=no uid=5000
+
+- name: be sure vmail group exist
+  group: name=vmail state=present gid=5000

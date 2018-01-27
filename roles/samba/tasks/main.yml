@@ -1,0 +1,19 @@
+- name: install requirement packages
+  yum: name={{ item }} state=installed
+  with_items:
+    - samba-client
+    - samba-common
+    - cifs-utils
+
+- name: be sure shared directories exist
+  file: path="{{ item.path }}" state=directory owner="{{ item.owner }}" group="{{ item.group }}"
+  with_items: "{{ directories }}"
+
+- name: be sure azure files mounted
+  mount:
+    path: "{{ item.path }}"
+    fstype: cifs
+    src: "//team04rgdiag628.file.core.windows.net/{{ item.share_name }}"
+    opts: "nofail,vers=3.0,username={{ storage_account_name }},password={{ storage_account_key }},dir_mode={{ item.mode }},file_mode={{ item.mode }},serverino,uid={{ item.uid }},gid={{ item.gid }}"
+    state: mounted
+  with_items: "{{ directories }}"
