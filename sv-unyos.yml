@@ -5,6 +5,7 @@
     - common
     - apache
     - php
+    - saslauthd
     - dovecot
     - postfix
     - samba

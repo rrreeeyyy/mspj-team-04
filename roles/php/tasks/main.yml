@@ -9,3 +9,6 @@
     - php-mbstring
     - php-mysql
     - php-pdo
+
+- name: be sure php.ini exist
+  copy: src="etc/php.ini" dest="/etc/php.ini"

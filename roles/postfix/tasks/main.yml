@@ -2,3 +2,18 @@
   yum: name={{ item }} state=installed
   with_items:
     - postfix
+
+- name: be sure main.cf exist
+  copy: src="etc/postfix/main.cf" dest="/etc/postfix/main.cf"
+
+- name: be sure master.cf exist
+  copy: src="etc/postfix/master.cf" dest="/etc/postfix/master.cf"
+
+- name: be sure vdomains exist
+  copy: src="etc/postfix/vdomains" dest="/etc/postfix/vdomains"
+
+- name: be sure vmailbox exist
+  copy: src="etc/postfix/vmailbox" dest="/etc/postfix/vmailbox"
+
+- name: creates vmailbox hash file
+  command: postmap /etc/postfix/vmailbox

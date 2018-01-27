@@ -1,0 +1,8 @@
+- name: be sure install requirement packages
+  yum: name={{ item }} state=installed
+  with_items:
+    - cyrus-sasl
+    - cyrus-sasl-lib
+
+- name: be sure saslauthd is running and enabled
+  systemd: state=started name=saslauthd enabled=yes

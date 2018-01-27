@@ -8,3 +8,24 @@
 
 - name: be sure vmail group exist
   group: name=vmail state=present gid=5000
+
+- name: be sure configuration files exist
+  copy: src="{{ item.src }}" dest="{{ item.dest }}"
+  with_items:
+    - { src: "etc/dovecot/dovecot-passwd" ,dest: "/etc/dovecot/dovecot-passwd" }
+    - { src: "etc/dovecot/dovecot.conf" ,dest: "/etc/dovecot/dovecot.conf" }
+    - { src: "etc/dovecot/conf.d/10-auth.conf" ,dest: "/etc/dovecot/conf.d/10-auth.conf" }
+    - { src: "etc/dovecot/conf.d/10-mail.conf" ,dest: "/etc/dovecot/conf.d/10-mail.conf" }
+    - { src: "etc/dovecot/conf.d/10-master.conf" ,dest: "/etc/dovecot/conf.d/10-master.conf" }
+    - { src: "etc/dovecot/conf.d/20-pop3.conf" ,dest: "/etc/dovecot/conf.d/20-pop3.conf" }
+    - { src: "etc/dovecot/conf.d/auth-passwdfile.conf.ext" ,dest: "/etc/dovecot/conf.d/auth-passwdfile.conf.ext" }
+    - { src: "etc/dovecot/conf.d/auth-static.conf.ext" ,dest: "/etc/dovecot/conf.d/auth-static.conf.ext" }
+
+- name: be sure cert files exist
+  copy: src="{{ item.src }}" dest="{{ item.dest }}" mode="0600"
+  with_items:
+    - { src: "etc/pki/dovecot/certs/dovecot.pem" ,dest: "/etc/pki/dovecot/certs/dovecot.pem" }
+    - { src: "etc/pki/dovecot/private/dovecot.pem" ,dest: "/etc/pki/dovecot/private/dovecot.pem" }
+
+- name: be sure dovecot is running and enabled
+  systemd: state=started name=dovecot enabled=yes
