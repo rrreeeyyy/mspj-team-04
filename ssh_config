@@ -1,0 +1,8 @@
+Host azure-xxx-01
+  HostName xxx.xxx.xxx.xxx
+  User xxx
+  IdentityFile ~/.ssh/xxx.pem
+Host azure-xxx-02
+  HostName xxx.xxx.xxx.xxx
+  User xxx
+  IdentityFile ~/.ssh/xxx.pem
