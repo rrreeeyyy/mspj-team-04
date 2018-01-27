@@ -3,3 +3,9 @@
   with_items:
     - httpd
     - httpd-tools
+
+- name: be sure virtualhost configuration exist
+  copy: src="etc/httpd/conf.d/virtualhost.conf" dest="/etc/httpd/conf.d/virtualhost.conf"
+
+- name: be sure welcome.conf does not exist
+  file: path="/etc/httpd/conf.d/welcome.conf" state=absent
