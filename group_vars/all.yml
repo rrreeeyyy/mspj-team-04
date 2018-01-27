@@ -1,0 +1,2 @@
+users:
+  - { name: centos, groups: centos }

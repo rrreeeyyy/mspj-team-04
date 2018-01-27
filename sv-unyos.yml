@@ -1,0 +1,5 @@
+- hosts: sv-unyos
+  become: true
+  become_user: root
+  roles:
+    - common

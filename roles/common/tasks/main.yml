@@ -1,0 +1,15 @@
+- name: be sure users exist
+  user: name="{{ item.name }}" state=present
+  with_items: "{{ users }}"
+
+- name: be sure ~/.ssh for each users exist
+  file: path="/home/{{ item.name }}/.ssh" state=directory owner="{{ item.name }}" group="{{ item.name }}" mode=0700
+  with_items: "{{ users }}"
+
+- name: be sure authorized_keys is deployed
+  copy: src="authorized_keys/{{ item.name }}" dest="/home/{{ item.name }}/.ssh/authorized_keys" owner="{{ item.name }}" group="{{ item.name }}" mode=0600
+  with_items: "{{ users }}"
+
+- name: be sure sudoers.d is deployed
+  copy: src="sudoers.d/{{ item.name }}" dest="/etc/sudoers.d/{{ item.name }}" owner="root" group="root" mode=0600
+  with_items: "{{ users }}"
